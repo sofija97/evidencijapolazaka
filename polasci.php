@@ -40,9 +40,14 @@ include "init.php";
 									<div class="mu-title">
 										<h2>Evidencija polazaka</h2>
 										<p>Izaberite liniju za koju zelite da vidite polaske</p>
-
+                                        <label for="linija">Linije</label>
+                                        <select id="linija" class="form-control" onchange="pretrazi()">
+                                        </select>
 									</div>
 								</div>
+                                <div class="col-md-12" id="rezultat">
+
+                                </div>
 							</div>
 
 						</div>
@@ -78,6 +83,36 @@ include "init.php";
     <script type="text/javascript" src="assets/js/app.js"></script>
 
 	<script type="text/javascript" src="assets/js/custom.js"></script>
+
+  <script>
+      function unesiLinije() {
+          $.ajax({
+             url : 'vebServis/linije',
+              success: function (data) {
+
+                  let nalepi = '';
+
+                  $.each(data,function (i,linija) {
+                      console.log(linija);
+                        nalepi += '<option value="' + linija.linijaID + '">'+linija.brojLinije +': ('+linija.od+' - '+ linija.do +')'+'</option>';
+                  });
+                  $("#linija").html(nalepi);
+              }
+          });
+      }
+      unesiLinije();
+
+      function pretrazi() {
+          let linijaID  = $("#linija").val();
+          $.ajax({
+              url: 'generisiPodatkeOPolascima.php',
+              data: {linijaID : linijaID},
+              success: function (data) {
+                  $("#rezultat").html(data);
+              }
+          })
+      }
+  </script>
 
   </body>
 </html>

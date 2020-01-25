@@ -26,4 +26,36 @@ class KomunikacijaSaBazom
 
         return $korisnik;
     }
+
+    public function vratiLinije()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM linija l join tiplinije tl on l.tipLinijeID = tl.tipLinijeID");
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $linije = [];
+
+        while($red = $result->fetch_object()){
+            $linije[] = new Linija($red->linijaID,$red->brojLinije,$red->od,$red->do,new TipLinije($red->tipLinijeID,$red->nazivTipaLinije));
+        }
+
+        return $linije;
+    }
+
+    public function vratiPolaskeZaLiniju($linijaID)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM polazak p join linija l on p.linijaID = l.linijaID join tiplinije tl on l.tipLinijeID = tl.tipLinijeID WHERE l.linijaID = ".$linijaID);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $polasci = [];
+
+        while($red = $result->fetch_object()){
+            $polasci[] = $red;
+        }
+
+        return $polasci;
+    }
 }
