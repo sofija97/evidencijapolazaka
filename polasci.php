@@ -38,22 +38,13 @@ include "init.php";
 							<div class="row">
 								<div class="col-md-12">
 									<div class="mu-title">
-										<h2>Logovanje na sistem</h2>
-										<p>Da biste koristili sistem, morate biti ulogovani!</p>
+										<h2>Evidencija polazaka</h2>
+										<p>Izaberite liniju za koju zelite da vidite polaske</p>
+
 									</div>
 								</div>
 							</div>
-                            <form method="POST" action="kontroler.php">
 
-                                    <label for="korisnickoIme">Korisnicko ime</label>
-                                    <input class="form-control" type="text" name="ime" placeholder="Unesite korisnicko ime" id="korisnickoIme">
-
-                                    <label for="korisnickaSifra">Korisnicka sifra</label>
-                                    <input class="form-control" type="password" name="sifra" placeholder="Unesite korisnicku sifru" id="korisnickaSifra">
-                                    <hr>
-                                    <input type="submit" name="login" class="form-control btn-primary" value="Uloguj se na sistem">
-
-                            </form>
 						</div>
 					</div>
 				</div>

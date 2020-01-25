@@ -104,8 +104,6 @@ class Korisnik implements JsonSerializable
         $this->korisnickaRola = $korisnickaRola;
     }
 
-
-
     public function jsonSerialize()
     {
         return json_encode(get_object_vars($this));
