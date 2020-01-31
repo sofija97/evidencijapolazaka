@@ -81,4 +81,11 @@ class KomunikacijaSaBazom
         $stmt->bind_param("sssi", $brojLinije, $od,$do,$tip);
         return $stmt->execute();
     }
+
+    public function obrisi($id)
+    {
+        $stmt = $this->conn->prepare("DELETE FROM linija WHERE linijaID = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
 }

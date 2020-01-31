@@ -57,6 +57,21 @@ include "init.php";
 
 						</div>
 					</div>
+                    <div class="col-md-12">
+                        <div class="mu-about-area">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mu-title">
+                                        <h2>Brisanje linije</h2>
+                                        <label for="linija">Linije</label>
+                                        <select id="linija" class="form-control">
+                                        </select>
+                                        <hr>
+                                        <button class="btn btn-danger" onclick="obrisi()">Obrisi</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
 				</div>
 			</div>
 		</section>
@@ -124,9 +139,42 @@ include "init.php";
               },
               success: function (data) {
                   $("#odgovor").html(data);
+                  unesiLinije();
               }
           })
       }
+
+      function obrisi() {
+          let id = $("#linija").val();
+
+          $.ajax({
+              url: 'obrisi.php',
+              type : 'POST',
+              data: {
+                  id : id
+              },
+              success: function (data) {
+                  $("#odgovor").html(data);
+                  unesiLinije();
+              }
+          })
+      }
+
+      function unesiLinije() {
+          $.ajax({
+              url : 'vebServis/linije',
+              success: function (data) {
+
+                  let nalepi = '';
+
+                  $.each(data,function (i,linija) {
+                      nalepi += '<option value="' + linija.linijaID + '">'+linija.brojLinije +': ('+linija.od+' - '+ linija.do +')'+'</option>';
+                  });
+                  $("#linija").html(nalepi);
+              }
+          });
+      }
+      unesiLinije();
   </script>
 
   </body>
