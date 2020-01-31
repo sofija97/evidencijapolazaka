@@ -19,8 +19,9 @@ include "init.php";
 
 	<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,400i,500,500i,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet">
- 
-	</head>
+      <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/dt-1.10.20/datatables.min.css"/>
+
+  </head>
   <body>
 
     <a class="scrollToTop" href="#">
@@ -33,39 +34,40 @@ include "init.php";
 		<section id="mu-about">
 			<div class="container">
 				<div class="row">
+					<div class="col-md-12">
+						<div class="mu-about-area">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="mu-title">
+										<h2>Unos korisnika</h2>
+										<p id="odgovor"></p>
+                                        <label for="imePrezime">Ime i prezime</label>
+                                        <input type="text" id="imePrezime" class="form-control">
+                                        <label for="username">Korisnicko Ime</label>
+                                        <input type="text" id="username" class="form-control">
+                                        <label for="password">Korisnicka Sifra</label>
+                                        <input type="text" id="password" class="form-control">
+                                        <hr>
+                                        <button class="btn btn-primary" onclick="sacuvajKorisnika()">Sacuvaj korisnika</button>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
                     <div class="col-md-12">
                         <div class="mu-about-area">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mu-title">
-                                        <h2>Unos polazaka</h2>
-                                        <p id="odgovor"></p>
-                                        <label for="linija">Linije</label>
-                                        <select id="linija" class="form-control">
-
-                                        </select>
-                                        <label for="sat">Sat</label>
-                                        <input type="number" min="0" max="23" id="sat" class="form-control">
-                                        <label for="minuti">Minuti (za vise unosa odvojite razmakom)</label>
-                                        <input type="text" id="minuti" class="form-control">
-                                        <hr>
-                                        <button class="btn btn-primary" onclick="unesiPolaske()">Unesi polaske</button>
-                                    </div>
+                                        <h2>Promena role</h2>
+                                        <div id="tabela">
+                                        </div>
+                                        </div>
                                 </div>
                             </div>
                     </div>
 				</div>
-                    <div class="col-md-12">
-                        <div class="mu-about-area">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="mu-title">
-                                        <div id="piechart" style="width: 900px; height: 500px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 			</div>
 		</section>
 	</main>
@@ -96,76 +98,67 @@ include "init.php";
     <script type="text/javascript" src="assets/js/app.js"></script>
 
 	<script type="text/javascript" src="assets/js/custom.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.20/datatables.min.js"></script>
 
-  <script>
 
-      function unesiPolaske() {
-          let linija = $("#linija").val();
-          let sat = $("#sat").val();
-          let minuti = $("#minuti").val();
+    <script>
+      function sacuvajKorisnika() {
+          let imePrezime = $("#imePrezime").val();
+          let username = $("#username").val();
+          let password = $("#password").val();
 
           $.ajax({
-              url: 'sacuvajPolaske.php',
-              type : 'POST',
+              url: 'sacuvajKorisnika.php',
+              type: 'POST',
               data: {
-                  linija : linija,
-                  sat : sat,
-                  minuti : minuti
+                  imePrezime : imePrezime,
+                  username : username,
+                  password : password
               },
               success: function (data) {
+                  console.log(data);
                   $("#odgovor").html(data);
+              },
+              error: function (podaci) {
+                  console.log(podaci);
               }
           })
       }
 
-      function unesiLinije() {
+      function promeniRolu(id) {
           $.ajax({
-              url : 'vebServis/linije',
+              url: 'vebServis/promeniRolu/'+id,
+              type: 'PUT',
+              success: function (data) {
+                  $("#odgovor").html(data);
+                  vratiKorisnike();
+              }
+          })
+      }
+
+      function vratiKorisnike() {
+          $.ajax({
+              url : 'vebServis/korisnici',
               success: function (data) {
 
-                  let nalepi = '';
+                  let nalepi = '<table id="tabelaData" class="table table-responsive"><thead><tr><th>KorisnikID</th><th>Ime i prezime</th><th>Promeni u administratora</th></tr></thead><tbody>';
 
-                  $.each(data,function (i,linija) {
-                      nalepi += '<option value="' + linija.linijaID + '">'+linija.brojLinije +': ('+linija.od+' - '+ linija.do +')'+'</option>';
+                  $.each(data,function (i,korisnik) {
+                      nalepi += "<tr>";
+                      nalepi += "<td>"+korisnik.korisnikID+"</td>";
+                      nalepi += "<td>"+korisnik.imePrezime+"</td>";
+                      nalepi += "<td><button class='btn btn-info' onclick='promeniRolu("+korisnik.korisnikID+")'>Promeni rolu</button></td>";
+                      nalepi += "</tr>";
                   });
-                  $("#linija").html(nalepi);
+
+                  nalepi += '</tbody></table>';
+                  $("#tabela").html(nalepi);
+                  $('#tabelaData').DataTable();
               }
           });
       }
-      unesiLinije();
+      vratiKorisnike();
   </script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            let niz = [['Sat', 'Broj polazaka']];
-
-            $.ajax({
-                url : 'podaci.php',
-                success : function (podaci) {
-                    $.each(JSON.parse(podaci),function (i,podatak) {
-                        let nizpodatak = [];
-                        nizpodatak.push(podatak.sat.toString(), parseInt(podatak.broj));
-                        niz.push(nizpodatak);
-                    });
-                    
-                    console.log(niz);
-
-                    var data = google.visualization.arrayToDataTable(niz);
-
-                    var options = {
-                        title: 'Broj polazaka po satu svih linija'
-                    };
-
-                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-                    chart.draw(data, options);
-                }
-            })
-        }
-    </script>
 
 
   </body>

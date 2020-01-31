@@ -48,6 +48,10 @@ include "init.php";
                                 <div class="col-md-12" id="rezultat">
 
                                 </div>
+
+                                <div class="col-md-12">
+                                    <iframe src="https://snazzymaps.com/embed/216021" width="100%" height="600px" style="border:none;"></iframe>
+                                </div>
 							</div>
 
 						</div>
