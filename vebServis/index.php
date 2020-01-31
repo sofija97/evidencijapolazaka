@@ -10,4 +10,10 @@ Flight::route('GET /linije', function(){
     echo json_encode($db->vratiLinije());
 });
 
+Flight::route('GET /tipovi', function(){
+    header("Content-Type: application/json; charset=utf-8");
+    $db = Flight::db();
+    echo json_encode($db->vratiTipove());
+});
+
 Flight::start();

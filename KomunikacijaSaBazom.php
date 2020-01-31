@@ -58,4 +58,27 @@ class KomunikacijaSaBazom
 
         return $polasci;
     }
+
+    public function vratiTipove()
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM tiplinije ");
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $tipovi = [];
+
+        while($red = $result->fetch_object()){
+            $tipovi[] = $red;
+        }
+
+        return $tipovi;
+    }
+
+    public function sacuvajLiniju($brojLinije, $od, $do, $tip)
+    {
+        $stmt = $this->conn->prepare("INSERT INTO linija VALUES (null,?,?,?,?)");
+        $stmt->bind_param("sssi", $brojLinije, $od,$do,$tip);
+        return $stmt->execute();
+    }
 }
