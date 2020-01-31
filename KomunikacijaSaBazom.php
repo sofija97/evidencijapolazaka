@@ -88,4 +88,11 @@ class KomunikacijaSaBazom
         $stmt->bind_param("i", $id);
         return $stmt->execute();
     }
+
+    public function sacuvajPolazak($linija, $sat, $minut, $korisnikID)
+    {
+        $stmt = $this->conn->prepare("INSERT INTO polazak VALUES (?,?,null,?,?)");
+        $stmt->bind_param("iiii", $linija, $korisnikID,$sat,$minut);
+        return $stmt->execute();
+    }
 }
