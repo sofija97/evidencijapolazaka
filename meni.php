@@ -30,14 +30,18 @@
                             if($administrator){
 ?>
                                 <li>
+                                    <a href="upravljanjeKorisnicima.php">Korisnici</a>
+                                </li>
+                                <li>
                                     <a href="administracijaLinija.php">Linije</a>
                                 </li>
                                 <li>
                                     <a href="administracijaPolazaka.php">Upravljanje polascima</a>
                                 </li>
-                                <li>
-                                    <a href="upravljanjeKorisnicima.php">Korisnici</a>
-                                </li>
+
+
+
+
                     <?php
                             }
                             ?>
