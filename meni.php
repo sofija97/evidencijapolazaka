@@ -33,7 +33,7 @@
                                     <a href="upravljanjeKorisnicima.php">Korisnici</a>
                                 </li>
                                 <li>
-                                    <a href="administracijaLinija.php">Linije</a>
+                                    <a href="administracijaLinija.php">Unos Linije</a>
                                 </li>
                                 <li>
                                     <a href="administracijaPolazaka.php">Upravljanje polascima</a>
@@ -46,7 +46,7 @@
                             }
                             ?>
                             <li>
-                                <a href="izlogujSe.php">Odjava sa sistema</a>
+                                <a href="izlogujSe.php">Logout</a>
                             </li>
                     <?php
                         }
