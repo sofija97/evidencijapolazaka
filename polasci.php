@@ -38,7 +38,7 @@ include "init.php";
 							<div class="row">
 								<div class="col-md-12">
 									<div class="mu-title">
-										<h2>Evidencija polazaka</h2>
+										<h2>Pregled polazaka</h2>
 										<p>Izaberite liniju za koju zelite da vidite polaske</p>
                                         <label for="linija">Linije</label>
                                         <select id="linija" class="form-control" onchange="pretrazi()">
