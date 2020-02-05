@@ -30,7 +30,7 @@
                             if($administrator){
 ?>
                                 <li>
-                                    <a href="upravljanjeKorisnicima.php">Korisnici</a>
+                                    <a href="upravljanjeKorisnicima.php"> Unos Korisnika</a>
                                 </li>
                                 <li>
                                     <a href="administracijaLinija.php">Unos Linije</a>
