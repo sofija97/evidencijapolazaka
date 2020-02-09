@@ -129,6 +129,10 @@ class KomunikacijaSaBazom
         return $stmt->execute();
     }
 
+
+
+
+
     public function vratiPodatkeZaGrafik()
     {
         $stmt = $this->conn->prepare("SELECT sat,count(polazakID) as broj FROM polazak GROUP BY sat");

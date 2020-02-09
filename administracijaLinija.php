@@ -65,14 +65,30 @@ include "init.php";
                                         <h2>Brisanje linije</h2>
                                         <label for="linija">Linije</label>
                                         <select id="linija" class="form-control">
+
                                         </select>
+
+                                        <hr>
+
                                         <hr>
                                         <button class="btn btn-danger" onclick="obrisi()">Obrisi</button>
+
                                     </div>
                                 </div>
                             </div>
                     </div>
 				</div>
+
+
+
+
+
+
+
+
+
+
+
 			</div>
 		</section>
 	</main>
@@ -116,6 +132,7 @@ include "init.php";
                         nalepi += '<option value="' + tip.tipLinijeID + '">'+tip.nazivTipaLinije +'</option>';
                   });
                   $("#tipLinije").html(nalepi);
+                  //$("#tipLinije1").html(nalepi);
               }
           });
       }
@@ -143,7 +160,7 @@ include "init.php";
               }
           })
       }
-
+      unesiTipove();
       function obrisi() {
           let id = $("#linija").val();
 
@@ -160,6 +177,10 @@ include "init.php";
           })
       }
 
+
+
+
+
       function unesiLinije() {
           $.ajax({
               url : 'vebServis/linije',
@@ -171,10 +192,12 @@ include "init.php";
                       nalepi += '<option value="' + linija.linijaID + '">'+linija.brojLinije +': ('+linija.od+' - '+ linija.do +')'+'</option>';
                   });
                   $("#linija").html(nalepi);
+                  //$("#linija1").html(nalepi);
               }
           });
       }
       unesiLinije();
+
   </script>
 
   </body>

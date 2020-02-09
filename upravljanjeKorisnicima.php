@@ -118,6 +118,7 @@ include "init.php";
               success: function (data) {
                   console.log(data);
                   $("#odgovor").html(data);
+                  vratiKorisnike();
               },
               error: function (podaci) {
                   console.log(podaci);
