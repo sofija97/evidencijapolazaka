@@ -141,11 +141,11 @@ include "init.php";
               url : 'vebServis/korisnici',
               success: function (data) {
 
-                  let nalepi = '<table id="tabelaData" class="table table-responsive"><thead><tr><th>KorisnikID</th><th>Ime i prezime</th><th>Promeni u administratora</th></tr></thead><tbody>';
+                  let nalepi = '<table id="tabelaData" class="table table-responsive"><thead><tr><th>Ime i prezime</th><th>Promeni u administratora</th></tr></thead><tbody>';
 
                   $.each(data,function (i,korisnik) {
                       nalepi += "<tr>";
-                      nalepi += "<td>"+korisnik.korisnikID+"</td>";
+                      //nalepi += "<td>"+korisnik.korisnikID+"</td>";
                       nalepi += "<td>"+korisnik.imePrezime+"</td>";
                       nalepi += "<td><button class='btn btn-info' onclick='promeniRolu("+korisnik.korisnikID+")'>Promeni rolu</button></td>";
                       nalepi += "</tr>";

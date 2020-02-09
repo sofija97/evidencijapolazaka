@@ -2,7 +2,8 @@
 		<div class="container">
 			<nav class="navbar navbar-expand-lg navbar-light mu-navbar">
 				<a class="navbar-brand mu-logo" href="index.php"><span>GSP - Evidencija</span></a>
-			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			    <span class="fa fa-bars"></span>
 			  </button>
 
@@ -18,15 +19,12 @@
                         }else{
                             /** @var Korisnik $korisnik */
                             $korisnik = $_SESSION['korisnik'];
-
                             $administrator = $korisnik->getKorisnickaRola()->getNazivRole() == 'Administrator';
-
                             ?>
                             <li>
                                 <a href="polasci.php">Polasci</a>
                             </li>
                     <?php
-
                             if($administrator){
 ?>
                                 <li>
@@ -38,11 +36,7 @@
                                 <li>
                                     <a href="administracijaPolazaka.php">Upravljanje polascima</a>
                                 </li>
-
-
-
-
-                    <?php
+                     <?php
                             }
                             ?>
                             <li>

@@ -13,7 +13,8 @@ class KomunikacijaSaBazom
 
     public function login($korisnickoIme,$korisncikaSifra)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM korisnik k join korisnickarola kr on k.korisnickaRolaID = kr.korisnickaRolaID WHERE korisnickoIme = ? AND korisnickaSifra = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM korisnik k join korisnickarola kr on
+            k.korisnickaRolaID = kr.korisnickaRolaID WHERE korisnickoIme = ? AND korisnickaSifra = ?");
         $stmt->bind_param("ss", $korisnickoIme, $korisncikaSifra);
         $stmt->execute();
 
@@ -46,7 +47,8 @@ class KomunikacijaSaBazom
 
     public function vratiPolaskeZaLiniju($linijaID)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM polazak p join linija l on p.linijaID = l.linijaID join tiplinije tl on l.tipLinijeID = tl.tipLinijeID WHERE l.linijaID = ".$linijaID);
+        $stmt = $this->conn->prepare("SELECT * FROM polazak p join linija l on p.linijaID = l.linijaID 
+                join tiplinije tl on l.tipLinijeID = tl.tipLinijeID WHERE l.linijaID = ".$linijaID);
         $stmt->execute();
 
         $result = $stmt->get_result();
