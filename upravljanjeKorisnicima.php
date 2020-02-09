@@ -60,7 +60,7 @@ include "init.php";
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mu-title">
-                                        <h2>Promena role</h2>
+                                        <h2>Promena role u administratora</h2>
                                         <div id="tabela">
                                         </div>
                                         </div>
